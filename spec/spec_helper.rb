@@ -16,7 +16,16 @@ RSpec.configure do |config|
   config.before :all do
     puts 'Preparing the ground'
     DBChecks::Mongo::download_latest_dump
-  #  DBChecks::Mongo::nuke_db
+    wait
+    DBChecks::Mongo::nuke_db
+    wait
     DBChecks::Mongo::restore_dump
+    wait
   end
+end
+
+def wait
+  print 'Sleeping because some fucking mysterious asynchronous shit is happening... '
+  sleep 5
+  puts 'done'
 end
