@@ -47,7 +47,7 @@ module DBChecks
     def self.restore_dump
       dump = Dir.entries('dumps').last
 
-      print 'Restoring dump... '
+      print "Restoring dump #{dump}... "
 
       %x[ tar xjf dumps/#{dump} | mongorestore --drop ] #; rm -r dump ] #--quiet ]
 

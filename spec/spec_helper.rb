@@ -16,11 +16,8 @@ RSpec.configure do |config|
   config.before :all do
     puts 'Preparing the ground'
     DBChecks::Mongo::download_latest_dump
-    wait
     DBChecks::Mongo::nuke_db
-    wait
     DBChecks::Mongo::restore_dump
-    wait
   end
 end
 
