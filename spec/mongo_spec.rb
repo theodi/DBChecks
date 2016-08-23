@@ -22,8 +22,8 @@ describe 'Test Mongo Backups' do
     end
 
     it 'has the right collections' do
-      expect(collections.first.name).to eq 'artefacts'
-      expect(collections.last.name).to eq 'publisher_users'
+      expect(collections.map { |c| c.name }.sort.first).to eq 'artefacts'
+      expect(collections.map { |c| c.name }.sort.last).to eq 'users'
     end
   end
 end
