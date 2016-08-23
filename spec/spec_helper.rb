@@ -13,7 +13,8 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before :all do
+    puts 'Preparing the ground'
     DBChecks::Mongo::download_latest_dump
-
+    DBChecks::Mongo::restore_dump
   end
 end
