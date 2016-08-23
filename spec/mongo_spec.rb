@@ -5,10 +5,25 @@ describe 'Test Mongo Backups' do
   end
 
   context 'restores a database' do
+    subject(:client) {
+      Mongo::Client.new(['127.0.0.1:27017'], database: 'govuk_content_publisher')
+    }
+
+    subject(:db) {
+      client.database
+    }
+
+    subject(:collections) {
+      db.collections
+    }
+
     it 'has collections' do
-      client = Mongo::Client.new(['127.0.0.1:27017'], database: 'govuk_content_publisher')
-      db = client.database
-      expect(db.collections.count).to be >= 10
+      expect(collections.count).to be >= 10
+    end
+
+    it 'has the right collections' do
+      expect(collections.first.name).to eq 'artefacts'
+      expect(collections.last.name).to eq 'publisher_users'
     end
   end
 end
