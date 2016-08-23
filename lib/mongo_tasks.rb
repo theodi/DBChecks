@@ -9,6 +9,7 @@ module DBChecks
 
       temp_key = SecureRandom.base64
 
+      print 'Downloading latest Mongo dump... '
       client = Fog::Storage.new({
         provider: 'Rackspace',
         rackspace_username: ENV['RACKSPACE_USER'],
@@ -30,6 +31,8 @@ module DBChecks
       File.open "dumps/#{key}", 'w' do |f|
         f.write file.body
       end
+
+      puts 'done'
     end
   end
 end

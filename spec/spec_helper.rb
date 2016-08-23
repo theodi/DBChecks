@@ -1,5 +1,5 @@
 require 'rake'
-require_relative '../lib/download_latest_dump'
+require_relative '../lib/mongo_tasks'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -14,5 +14,6 @@ RSpec.configure do |config|
 
   config.before :all do
     DBChecks::Mongo::download_latest_dump
+
   end
 end
