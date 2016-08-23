@@ -1,5 +1,5 @@
 services:
-  -mongodb
+  - mongodb
 language: ruby
 rvm:
   - 2.3.1
