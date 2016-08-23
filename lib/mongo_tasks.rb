@@ -49,7 +49,7 @@ module DBChecks
 
       print 'Restoring dump... '
 
-      %x[ tar xjf dumps/#{dump} | mongorestore --quiet ]
+      %x[ tar xjf dumps/#{dump} | mongorestore --drop --quiet ]
       FileUtils.rm_r 'dump'
 
       puts 'done'
