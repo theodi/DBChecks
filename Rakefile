@@ -1,4 +1,7 @@
-require_relative 'lib/download_latest_dump'
+require_relative 'lib/mongo_tasks'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new
 
 desc 'Download the latest backup'
 namespace :dumps do
@@ -8,3 +11,5 @@ namespace :dumps do
     end
   end
 end
+
+task :default => [:spec]
