@@ -15,6 +15,7 @@ RSpec.configure do |config|
   config.before :all do
     puts 'Preparing the ground'
     DBChecks::Mongo::download_latest_dump
+    DBChecks::Mongo::nuke_db
     DBChecks::Mongo::restore_dump
   end
 end

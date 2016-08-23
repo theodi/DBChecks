@@ -10,6 +10,7 @@ module DBChecks
       temp_key = SecureRandom.base64
 
       print 'Downloading latest Mongo dump... '
+
       client = Fog::Storage.new({
         provider: 'Rackspace',
         rackspace_username: ENV['RACKSPACE_USER'],
@@ -35,11 +36,22 @@ module DBChecks
       puts 'done'
     end
 
+    def self.nuke_db
+      print 'Nuking db...'
+
+      %x[ mongo govuk_content_publisher --eval 'db.dropDatabase()' ]
+
+      puts 'done'
+    end
+
     def self.restore_dump
       dump = Dir.entries('dumps').last
+
       print 'Restoring dump... '
-      output = %x[ tar xjf dumps/#{dump} | mongorestore --drop --quiet ]
+
+      %x[ tar xjf dumps/#{dump} | mongorestore --quiet ]
       FileUtils.rm_r 'dump'
+
       puts 'done'
     end
   end
