@@ -48,8 +48,7 @@ module DBChecks
       dump = Dir.entries('dumps').last
 
       print "Restoring dump #{dump}... "
-
-      %x[ tar xjf dumps/#{dump} | mongorestore --drop ] #; rm -r dump ] #--quiet ]
+      %x[ tar xjf dumps/#{dump} && cd dumps/ && mongorestore --drop && cd ../ ] #--quiet ]
 
       puts 'done'
     end
