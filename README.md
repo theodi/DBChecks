@@ -1,5 +1,2 @@
 [![Build Status](http://img.shields.io/travis/theodi/DBChecks.svg?style=flat-square)](https://travis-ci.org/theodi/DBChecks)
-[![Dependency Status](http://img.shields.io/gemnasium/theodi/DBChecks.svg?style=flat-square)](https://gemnasium.com/theodi/DBChecks)
-[![Dependency CI](http://dependencyci.com/github/theodi/DBChecks/badge?style=flat-square)](http://dependencyci.com/github/theodi/DBChecks)
-[![Code Climate](http://img.shields.io/codeclimate/github/theodi/DBChecks.svg?style=flat-square)](https://codeclimate.com/github/theodi/DBChecks)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://theodi.mit-license.org)
