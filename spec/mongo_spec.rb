@@ -4,26 +4,28 @@ describe 'Test Mongo Backups' do
     expect(Dir.entries('dumps/').last).to eq "mongo-#{today}.tbz"
   end
 
-  context 'restores a database' do
+  context 'restore a database' do
     subject(:client) {
       Mongo::Client.new(['127.0.0.1:27017'], database: 'govuk_content_publisher')
     }
+    subject(:db) { client.database }
+    subject(:collections) { db.collections }
 
-    subject(:db) {
-      client.database
-    }
+    context 'collections' do
+      it 'has collections' do
+        expect(collections.count).to be >= 10
+      end
 
-    subject(:collections) {
-      db.collections
-    }
+      it 'has the right collections' do
+        expect(collections.map { |c| c.name }.sort.first).to eq 'artefacts'
+        expect(collections.map { |c| c.name }.sort.last).to eq 'users'
+      end
 
-    it 'has collections' do
-      expect(collections.count).to be >= 10
-    end
-
-    it 'has the right collections' do
-      expect(collections.map { |c| c.name }.sort.first).to eq 'artefacts'
-      expect(collections.map { |c| c.name }.sort.last).to eq 'users'
+      context 'collections are the right size' do
+        it 'has enough panopticon users' do
+          expect(client[:panopticon_users].count).to be >= 91
+        end
+      end
     end
   end
 end
