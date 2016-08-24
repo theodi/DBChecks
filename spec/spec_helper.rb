@@ -1,6 +1,6 @@
 require 'rake'
 require 'mongo'
-require_relative '../lib/mongo_tasks'
+require 'mongo_jobs'
 
 RSpec.configure do |config|
   config.before :all do
@@ -8,9 +8,9 @@ RSpec.configure do |config|
 
     unless ENV['SPEEDY']
       puts 'Preparing the ground'
-      DBChecks::Mongo::download_latest_dump
-      DBChecks::Mongo::nuke_db
-      DBChecks::Mongo::restore_dump
+      MongoJobs::download_latest_dump 'quirkafleeg-dumps'
+      MongoJobs::nuke_db 'govuk_content_publisher'
+      MongoJobs::restore_dump
     end
   end
 end

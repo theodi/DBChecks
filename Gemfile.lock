@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/theodi/mongo_jobs.git
+  revision: 389891d5504ede358152a18936248ff35c8025f5
+  specs:
+    mongo_jobs (0.1.0)
+      dotenv (~> 2.1)
+      fog (~> 1.38)
+      mime-types (~> 3.1)
+      mongo (~> 2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -185,6 +195,7 @@ DEPENDENCIES
   fog
   mime-types
   mongo
+  mongo_jobs!
   pry
   rake
   rspec
