@@ -14,15 +14,13 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before :all do
-    puts 'Preparing the ground'
-    DBChecks::Mongo::download_latest_dump
-    DBChecks::Mongo::nuke_db
-    DBChecks::Mongo::restore_dump
-  end
-end
+    Mongo::Logger.logger.level = ::Logger::FATAL
 
-def wait
-  print 'Sleeping because some fucking mysterious asynchronous shit is happening... '
-  sleep 5
-  puts 'done'
+    unless ENV['SPEEDY']
+      puts 'Preparing the ground'
+      DBChecks::Mongo::download_latest_dump
+      DBChecks::Mongo::nuke_db
+      DBChecks::Mongo::restore_dump
+    end
+  end
 end
