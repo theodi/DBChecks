@@ -11,7 +11,7 @@ describe 'Test Mongo Backups' do
     subject(:db) { client.database }
     subject(:collections) { db.collections }
 
-    context 'collections' do
+    context 'inspect collections' do
       it 'has collections' do
         expect(collections.count).to be >= 10
       end
@@ -21,9 +21,24 @@ describe 'Test Mongo Backups' do
         expect(collections.map { |c| c.name }.sort.last).to eq 'users'
       end
 
-      context 'collections are the right size' do
+      context 'its collections are the right size' do
         it 'has enough panopticon users' do
           expect(client[:panopticon_users].count).to be >= 91
+        end
+
+        it 'has enough artefacts' do
+          expect(client[:artefacts].count).to be >= 1900
+        end
+      end
+
+      context 'its collections have the right content' do
+        it 'edition has the right words' do
+          words = db[:editions].find( {
+            slug: 'sam-pikesley',
+            version_number: 4
+          } ).entries.first[:description]
+
+          expect(words).to match /Vim is the One True Editor/
         end
       end
     end
